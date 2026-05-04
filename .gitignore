@@ -1,0 +1,25 @@
+# dependencies
+node_modules/
+
+# env files
+.env
+.env.*
+!.env.example
+
+# build output
+dist/
+build/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+
+# system files
+.DS_Store
+Thumbs.db
+
+# vite
+.vite/
+
+# IDE
+.vscode/
