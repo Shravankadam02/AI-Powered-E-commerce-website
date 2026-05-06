@@ -1,11 +1,12 @@
 import React from 'react'
-import Navbar from '../components/Nav.jsx'
-import Hero from '../components/Hero.jsx'
+import AdminNavbar from '../components/Nav'
+import Sidebar from '../components/Sidebar'
 
 const Home = () => {
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-[#141414] to-[#0c2025]">
-      <Hero />
+      <AdminNavbar />
+      <Sidebar />
     </div>
   )
 }

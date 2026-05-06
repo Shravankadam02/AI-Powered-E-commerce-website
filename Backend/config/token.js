@@ -10,4 +10,14 @@ const generateToken = (userId) => {
     }
 } 
 
-export default generateToken;
+const generateToken1 = (email) => {
+    try {
+        let token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '7d' });
+    return token;
+    } catch (error) {
+        console.error("Error generating token:", error);
+    }
+} 
+
+
+export { generateToken1 , generateToken };

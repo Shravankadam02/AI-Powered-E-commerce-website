@@ -1,7 +1,7 @@
 import User from "../model/userModel.js";
 import validator from "validator";
 import bcrypt from "bcryptjs";
-import generateToken from "../config/token.js";
+import { generateToken1,generateToken } from "../config/token.js";
 
 
 
@@ -23,7 +23,7 @@ const register = async (req, res) => {
             email,
             password: hashPassword,
         });
-        
+
         let token = generateToken(user._id);
 
         res.cookie("token", token, {
@@ -33,12 +33,12 @@ const register = async (req, res) => {
             maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
         });
 
-        return res.status(201).json({ message: "User registered successfully", user});
+        return res.status(201).json({ message: "User registered successfully", user });
 
     } catch (error) {
         return res.status(500).json({ message: "Internal server error" });
     }
-} 
+}
 
 const login = async (req, res) => {
     try {
@@ -68,11 +68,11 @@ const login = async (req, res) => {
 const logout = (req, res) => {
     try {
         res.clearCookie("token", {
-        httpOnly: true,
-        secure: false,
-        sameSite: "strict",
-    });
-    return res.status(200).json({ message: "Logout successful"});
+            httpOnly: true,
+            secure: false,
+            sameSite: "strict",
+        });
+        return res.status(200).json({ message: "Logout successful" });
     } catch (error) {
         return res.status(500).json({ message: "Internal server error" });
     }
@@ -99,4 +99,24 @@ const googleLogin = async (req, res) => {
     }
 }
 
-export { register, login, logout, googleLogin };
+const adminLogin = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
+            let token = generateToken1(email);
+            res.cookie("token", token, {
+                httpOnly: true,
+                secure: false,
+                sameSite: "strict",
+                maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+            });
+            return res.status(200).json({ token, message: "Admin login successful" });
+        } else {
+            return res.status(400).json({ message: "Invalid email or password" });
+        }
+    } catch (error) {
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+export { register, login, logout, googleLogin , adminLogin };
