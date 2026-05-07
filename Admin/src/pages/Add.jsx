@@ -103,7 +103,7 @@ const Add = () => {
       <AdminNavbar />
       <Sidebar />
 
-      <div className="ml-64 mt-16 px-8 text-white">
+      <div className="ml-20 md:ml-64 mt-16 px-8 text-white">
         <h1 className="text-2xl font-semibold mb-6">Add New Product</h1>
 
         <form

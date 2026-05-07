@@ -7,7 +7,7 @@ import axios from "axios";
 
 const AdminNavbar = () => {
   const navigate = useNavigate();
-  const { adminData } = useContext(adminDataContext);
+  const { adminData ,getAdmin } = useContext(adminDataContext);
   const { serverUrl } = useContext(authDataContext);
 
   const [scrolled, setScrolled] = useState(false);
@@ -28,8 +28,12 @@ const AdminNavbar = () => {
       await axios.get(`${serverUrl}/api/auth/logout`, {
         withCredentials: true,
       });
-      console.log("Logout successful");
+      
+      adminData(null);
+      getAdmin();
+      console.log("Logout successful, admin data cleared.");
       navigate("/login");
+      
     } catch (err) {
       console.error("Logout error:", err);
     }

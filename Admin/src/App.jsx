@@ -9,7 +9,7 @@ import { adminDataContext } from './context/Admincontext'
 
 
 const App = () => {
-    let adminData = useContext(adminDataContext)
+    let { adminData } = useContext(adminDataContext)
   return (
     <>
       {!adminData ? <Login /> : <>

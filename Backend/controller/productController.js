@@ -36,4 +36,28 @@ const addProduct = async (req, res) => {
     }
 }
 
-export { addProduct }
+const listProducts = async (req, res) => {
+    try {
+        const products = await Product.find({})
+        res.status(200).json({ products });
+    } catch (error) {
+        console.error("Error listing products:", error);
+        return res.status(500).json({ message: error.message });
+    }
+}
+
+const removeProduct = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const product = await Product.findByIdAndDelete(id);
+        if (!product) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+        res.status(200).json({ message: "Product removed successfully", product });
+    } catch (error) {
+        console.error("Error removing product:", error);
+        return res.status(500).json({ message: error.message });
+    }
+}
+
+export { addProduct, listProducts, removeProduct };
