@@ -1,6 +1,9 @@
-import React from 'react'
-
+import React, { use } from 'react'
+import { useNavigate } from 'react-router-dom';
 const Hero = () => {
+
+  const navigate = useNavigate();
+
   return (
     <section
       className="relative w-full min-h-screen flex flex-col justify-center overflow-hidden px-16 pt-20 pb-16"
@@ -44,11 +47,13 @@ const Hero = () => {
       {/* CTAs */}
       <div className="flex items-center gap-5">
         <button
+          onClick={() => navigate('/Products')}
           className="bg-white text-[#0d1b2a] text-[11px] font-medium tracking-[0.1em] uppercase px-8 py-[14px] rounded-sm hover:opacity-85 transition-all duration-200 hover:-translate-y-px"
         >
           Shop Now
         </button>
         <button
+          onClick={() => navigate('/collections')}
           className="bg-transparent text-white/40 text-[11px] font-normal tracking-[0.1em] uppercase px-7 py-[13px] rounded-sm border border-white/10 hover:border-white/30 hover:text-white/70 transition-all duration-200"
         >
           View Collections
